@@ -1,0 +1,5 @@
+.pytest_cache
+dados_hyperledger
+faiss_index_v2
+src/__pycache__
+src/*/__pycache__
