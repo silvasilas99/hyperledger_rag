@@ -11,6 +11,9 @@ class FAISSVectorStore(VectorStore):
         self.db = None
 
     def add_documents(self, documents: List[Document]):
+        if not documents:
+            print("[!] Aviso: Tentativa de adicionar uma lista vazia de documentos ao banco vetorial.")
+            return
         lc_docs = [LCDocument(page_content=d.content, metadata=d.metadata) for d in documents]
         if self.db is None:
             self.db = FAISS.from_documents(lc_docs, self.embeddings)

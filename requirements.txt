@@ -1,8 +1,10 @@
 requests
 beautifulsoup4
-langchain 
-langchain-community 
-langchain-huggingface 
-transformers 
-sentence-transformers 
+langchain
+langchain-community
+langchain-huggingface
+transformers
+sentence-transformers
 faiss-cpu
+pytest
+pytest-mock

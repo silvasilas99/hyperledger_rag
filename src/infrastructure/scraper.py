@@ -10,12 +10,20 @@ class BeautifulSoupScraper(Scraper):
 
     def fetch_content(self, url: str) -> Optional[str]:
         try:
-            response = requests.get(url, timeout=self.timeout)
+            headers = {
+                'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36',
+                'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8',
+                'Accept-Language': 'en-US,en;q=0.9',
+                'Referer': 'https://www.google.com/'
+            }
+            response = requests.get(url, headers=headers, timeout=self.timeout)
             if 'text/html' not in response.headers.get('Content-Type', ''):
+                print(f"[!] Erro: Content-Type inválido ({response.headers.get('Content-Type')}) para {url}")
                 return None
             response.raise_for_status()
             return response.text
-        except requests.RequestException:
+        except requests.RequestException as e:
+            print(f"[!] Erro ao buscar {url}: {e}")
             return None
 
     def extract_links(self, url: str, html: str) -> List[str]:

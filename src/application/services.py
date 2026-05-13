@@ -32,7 +32,7 @@ class CrawlerService:
                     self.queue.append(link)
             
             count += 1
-            print(f"[*] Processado: {url}")
+            print(f"[*] Processado ({count}/{max_pages}): {url}")
         return documents
 
 class IngestionService:

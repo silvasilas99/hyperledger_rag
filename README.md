@@ -37,14 +37,14 @@ O projeto utiliza uma interface de linha de comando (CLI) única através do arq
 ### 1. Coleta de Dados (Crawling)
 Para baixar a documentação e gerar o índice vetorial:
 ```bash
-python src/main.py crawl --pages 20
+python3 src/main.py crawl --pages 50
 ```
-*O índice será salvo na pasta `faiss_index_v2`.*
+*O índice será salvo na pasta `faiss_index_v2`. O sistema agora gerencia automaticamente o caminho de execução e utiliza headers de navegador para evitar bloqueios.*
 
 ### 2. Consulta (Ask)
 Para fazer perguntas ao sistema RAG (requer que o passo de crawling tenha sido executado ao menos uma vez):
 ```bash
-python src/main.py ask "O que é Hyperledger Fabric?"
+python3 src/main.py ask "Como configurar um serviço de ordenação BFT no Fabric v3.0?"
 ```
 
 ## 🧪 Testes

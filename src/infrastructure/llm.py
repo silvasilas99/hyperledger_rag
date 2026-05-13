@@ -2,13 +2,13 @@ from transformers import pipeline
 from langchain_huggingface import HuggingFacePipeline
 from langchain_classic.chains import RetrievalQA
 from src.core.interfaces import LanguageModel, VectorStore
-from langchain_community.vectorstores import FAISS # Para tipagem interna
 
 class TinyLlamaModel(LanguageModel):
     def __init__(self, model_id: str = "TinyLlama/TinyLlama-1.1B-Chat-v1.0"):
         pipe = pipeline(
             "text-generation", 
             model=model_id, 
+            device_map="auto",
             max_new_tokens=512, 
             do_sample=True, 
             temperature=0.7, 
@@ -18,7 +18,6 @@ class TinyLlamaModel(LanguageModel):
         self.llm = HuggingFacePipeline(pipeline=pipe)
 
     def generate(self, prompt: str) -> str:
-        # Nota: Em um sistema RAG real, o prompt já contém o contexto.
         return self.llm.invoke(prompt)
 
 class RAGChain:

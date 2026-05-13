@@ -1,5 +1,10 @@
 import os
+import sys
 import argparse
+
+# Adiciona o diretório raiz ao sys.path para permitir importações do pacote 'src'
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
+
 from src.infrastructure.scraper import BeautifulSoupScraper
 from src.infrastructure.vector_store import FAISSVectorStore
 from src.infrastructure.llm import TinyLlamaModel, RAGChain
@@ -32,6 +37,10 @@ def main():
         crawler = CrawlerService(scraper, TARGET_URL)
         docs = crawler.execute(max_pages=args.pages)
         
+        if not docs:
+            print("[!] Erro: Nenhum documento foi coletado. Verifique sua conexão ou se a URL está acessível.")
+            return
+
         ingestion = IngestionService(vector_store)
         ingestion.execute(docs)
         vector_store.save(VECTOR_DB_PATH)
