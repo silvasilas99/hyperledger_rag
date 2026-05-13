@@ -13,7 +13,9 @@ class TinyLlamaModel(LanguageModel):
             do_sample=True, 
             temperature=0.7, 
             top_k=50, 
-            top_p=0.95
+            top_p=0.95,
+            return_full_text=False,
+            clean_up_tokenization_spaces=False
         )
         self.llm = HuggingFacePipeline(pipeline=pipe)
 

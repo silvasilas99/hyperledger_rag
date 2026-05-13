@@ -27,7 +27,6 @@ Este projeto implementa um sistema de **RAG (Retrieval-Augmented Generation)** l
 3. Instale as dependências:
    ```bash
    pip install -r requirements.txt
-   pip install pytest pytest-mock
    ```
 
 ## 📖 Como usar
@@ -44,7 +43,7 @@ python3 src/main.py crawl --pages 50
 ### 2. Consulta (Ask)
 Para fazer perguntas ao sistema RAG (requer que o passo de crawling tenha sido executado ao menos uma vez):
 ```bash
-python3 src/main.py ask "Como configurar um serviço de ordenação BFT no Fabric v3.0?"
+python3 src/main.py ask "O que é um chaincode no Hyperledger Fabric?"
 ```
 
 ## 🧪 Testes
